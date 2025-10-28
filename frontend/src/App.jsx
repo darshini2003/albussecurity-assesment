@@ -97,12 +97,12 @@ function App() {
   return (
     <div className="min-h-screen animated-gradient relative overflow-hidden">
       {/* Animated Background Orbs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-violet-600/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
       {/* Header */}
-      <header className="relative bg-black/40 backdrop-blur-xl border-b border-purple-500/30 shadow-lg shadow-purple-500/10 z-10">
-        <div className="absolute inset-0 shimmer opacity-20"></div>
+      <header className="relative bg-black/60 backdrop-blur-xl border-b border-purple-500/20 shadow-lg shadow-purple-500/5 z-10">
+        <div className="absolute inset-0 shimmer opacity-10"></div>
         <div className="container mx-auto px-4 py-4 relative z-10">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
