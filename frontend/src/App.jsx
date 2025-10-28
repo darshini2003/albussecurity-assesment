@@ -95,10 +95,15 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950">
+    <div className="min-h-screen animated-gradient relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
       {/* Header */}
-      <header className="bg-black/40 backdrop-blur-xl border-b border-purple-500/30 shadow-lg shadow-purple-500/10">
-        <div className="container mx-auto px-4 py-4">
+      <header className="relative bg-black/40 backdrop-blur-xl border-b border-purple-500/30 shadow-lg shadow-purple-500/10 z-10">
+        <div className="absolute inset-0 shimmer opacity-20"></div>
+        <div className="container mx-auto px-4 py-4 relative z-10">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -157,7 +162,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 relative z-10">
         {activeTab === 'dashboard' && (
           <Dashboard stats={stats} />
         )}
@@ -198,14 +203,14 @@ function App() {
 function Dashboard({ stats }) {
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between slide-in-up">
         <div>
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">Dashboard Overview</h2>
-          <p className="text-gray-400">Track your bug bounty hunting progress</p>
+          <h2 className="text-5xl font-bold gradient-text mb-2 neon-text">Dashboard Overview</h2>
+          <p className="text-gray-300 text-lg">Track your bug bounty hunting progress in real-time</p>
         </div>
-        <button className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-xl transition shadow-lg shadow-purple-500/30">
+        <button className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/70 pulse-glow hover:scale-105">
           <Download className="w-5 h-5" />
-          <span>Export Report</span>
+          <span className="font-semibold">Export Report</span>
         </button>
       </div>
 
@@ -242,32 +247,47 @@ function Dashboard({ stats }) {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-green-500/10 to-emerald-600/10 backdrop-blur-md border border-green-500/20 rounded-xl p-6">
-          <div className="flex items-center space-x-3 mb-3">
-            <CheckCircle className="w-6 h-6 text-green-400" />
-            <h3 className="text-lg font-semibold text-white">Success Rate</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 slide-in-up" style={{animationDelay: '0.2s'}}>
+        <div className="group relative bg-gradient-to-br from-green-500/10 to-emerald-600/10 backdrop-blur-md border-2 border-green-500/30 rounded-2xl p-6 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-500 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/10 to-transparent shimmer opacity-0 group-hover:opacity-100"></div>
+          <div className="relative z-10">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="p-3 bg-green-500/20 rounded-xl border-2 border-green-500/40 group-hover:rotate-12 transition-transform duration-500">
+                <CheckCircle className="w-6 h-6 text-green-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Success Rate</h3>
+            </div>
+            <p className="text-4xl font-black text-green-400 mb-2">87.5%</p>
+            <p className="text-sm text-gray-300 font-medium">Accepted vulnerabilities</p>
           </div>
-          <p className="text-3xl font-bold text-green-400">87.5%</p>
-          <p className="text-sm text-gray-400 mt-2">Accepted vulnerabilities</p>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-500/10 to-cyan-600/10 backdrop-blur-md border border-blue-500/20 rounded-xl p-6">
-          <div className="flex items-center space-x-3 mb-3">
-            <Award className="w-6 h-6 text-blue-400" />
-            <h3 className="text-lg font-semibold text-white">Avg Bounty</h3>
+        <div className="group relative bg-gradient-to-br from-blue-500/10 to-cyan-600/10 backdrop-blur-md border-2 border-blue-500/30 rounded-2xl p-6 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent shimmer opacity-0 group-hover:opacity-100"></div>
+          <div className="relative z-10">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="p-3 bg-blue-500/20 rounded-xl border-2 border-blue-500/40 group-hover:rotate-12 transition-transform duration-500">
+                <Award className="w-6 h-6 text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Avg Bounty</h3>
+            </div>
+            <p className="text-4xl font-black text-blue-400 mb-2">${stats.total_vulnerabilities > 0 ? (stats.total_bounties / stats.total_vulnerabilities).toFixed(2) : '0.00'}</p>
+            <p className="text-sm text-gray-300 font-medium">Per vulnerability</p>
           </div>
-          <p className="text-3xl font-bold text-blue-400">${stats.total_vulnerabilities > 0 ? (stats.total_bounties / stats.total_vulnerabilities).toFixed(2) : '0.00'}</p>
-          <p className="text-sm text-gray-400 mt-2">Per vulnerability</p>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-500/10 to-pink-600/10 backdrop-blur-md border border-purple-500/20 rounded-xl p-6">
-          <div className="flex items-center space-x-3 mb-3">
-            <TrendingUp className="w-6 h-6 text-purple-400" />
-            <h3 className="text-lg font-semibold text-white">This Month</h3>
+        <div className="group relative bg-gradient-to-br from-purple-500/10 to-pink-600/10 backdrop-blur-md border-2 border-purple-500/30 rounded-2xl p-6 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent shimmer opacity-0 group-hover:opacity-100"></div>
+          <div className="relative z-10">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="p-3 bg-purple-500/20 rounded-xl border-2 border-purple-500/40 group-hover:rotate-12 transition-transform duration-500">
+                <TrendingUp className="w-6 h-6 text-purple-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white">This Month</h3>
+            </div>
+            <p className="text-4xl font-black text-purple-400 mb-2">+{stats.total_vulnerabilities}</p>
+            <p className="text-sm text-gray-300 font-medium">New findings</p>
           </div>
-          <p className="text-3xl font-bold text-purple-400">+{stats.total_vulnerabilities}</p>
-          <p className="text-sm text-gray-400 mt-2">New findings</p>
         </div>
       </div>
     </div>
@@ -276,28 +296,36 @@ function Dashboard({ stats }) {
 
 function StatCard({ icon, title, value, color, trend }) {
   const colorClasses = {
-    blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-400',
-    green: 'from-green-500/20 to-green-600/20 border-green-500/30 text-green-400',
-    red: 'from-red-500/20 to-red-600/20 border-red-500/30 text-red-400',
-    yellow: 'from-yellow-500/20 to-yellow-600/20 border-yellow-500/30 text-yellow-400',
+    blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/40 text-blue-400 shadow-blue-500/30',
+    green: 'from-green-500/20 to-green-600/20 border-green-500/40 text-green-400 shadow-green-500/30',
+    red: 'from-red-500/20 to-red-600/20 border-red-500/40 text-red-400 shadow-red-500/30',
+    yellow: 'from-yellow-500/20 to-yellow-600/20 border-yellow-500/40 text-yellow-400 shadow-yellow-500/30',
   }
 
   return (
-    <div className={`bg-gradient-to-br ${colorClasses[color]} backdrop-blur-md border rounded-xl p-6 hover:scale-105 transition-transform duration-300 shadow-lg`}>
-      <div className="flex items-center justify-between mb-4">
-        <div className={`p-3 rounded-lg bg-black/30 ${colorClasses[color].split(' ')[3]}`}>
-          {icon}
-        </div>
-        {trend && (
-          <div className="flex items-center space-x-1 text-green-400 text-sm font-semibold">
-            <TrendingUp className="w-4 h-4" />
-            <span>{trend}</span>
+    <div className={`group relative bg-gradient-to-br ${colorClasses[color]} backdrop-blur-md border-2 rounded-2xl p-6 hover:scale-110 hover:-translate-y-2 transition-all duration-500 shadow-2xl scale-in overflow-hidden`}>
+      {/* Shimmer overlay */}
+      <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      
+      {/* Floating orb */}
+      <div className={`absolute -top-10 -right-10 w-32 h-32 ${colorClasses[color].split(' ')[0]} rounded-full blur-2xl opacity-50 group-hover:opacity-70 transition-opacity float`}></div>
+      
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-4">
+          <div className={`p-4 rounded-xl bg-gradient-to-br from-black/40 to-black/20 ${colorClasses[color].split(' ')[2]} border-2 group-hover:rotate-12 transition-transform duration-500`}>
+            {icon}
           </div>
-        )}
-      </div>
-      <div>
-        <p className="text-gray-400 text-sm mb-1">{title}</p>
-        <p className="text-3xl font-bold text-white">{value}</p>
+          {trend && (
+            <div className="flex items-center space-x-1 bg-green-500/20 px-3 py-1 rounded-full border border-green-500/30">
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className="text-green-400 text-sm font-bold">{trend}</span>
+            </div>
+          )}
+        </div>
+        <div>
+          <p className="text-gray-300 text-sm font-semibold mb-2 uppercase tracking-wider">{title}</p>
+          <p className="text-4xl font-black text-white drop-shadow-lg">{value}</p>
+        </div>
       </div>
     </div>
   )
@@ -418,30 +446,40 @@ function Programs({ programs, onDelete, onRefresh, showForm, setShowForm }) {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPrograms.map((program) => (
-          <div key={program.id} className="group bg-gradient-to-br from-black/40 to-purple-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-6 hover:border-purple-400/50 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300">
-            <div className="flex justify-between items-start mb-4">
-              <div className="flex items-center space-x-2">
-                <Shield className="w-5 h-5 text-purple-400" />
-                <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition">{program.name}</h3>
+        {filteredPrograms.map((program, index) => (
+          <div key={program.id} className="group relative bg-gradient-to-br from-black/60 to-purple-900/30 backdrop-blur-xl border-2 border-purple-500/40 rounded-2xl p-6 hover:border-purple-400/70 hover:shadow-2xl hover:shadow-purple-500/40 hover:scale-105 transition-all duration-500 overflow-hidden scale-in" style={{animationDelay: `${index * 0.1}s`}}>
+            {/* Animated background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/10 to-purple-600/0 shimmer opacity-0 group-hover:opacity-100"></div>
+            
+            {/* Glow orb */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-all duration-500"></div>
+            
+            <div className="relative z-10">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-purple-500/20 rounded-lg border-2 border-purple-500/40 group-hover:rotate-12 transition-transform duration-500">
+                    <Shield className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">{program.name}</h3>
+                </div>
+                <button
+                  onClick={() => onDelete(program.id)}
+                  className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg hover:scale-110 transition-all duration-300"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
               </div>
-              <button
-                onClick={() => onDelete(program.id)}
-                className="text-red-400 hover:text-red-300 hover:scale-110 transition-all"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="space-y-2 text-gray-300">
-              <p className="flex items-center"><span className="text-purple-400 font-semibold mr-2">Platform:</span> {program.platform}</p>
-              {program.scope && <p className="flex items-center"><span className="text-purple-400 font-semibold mr-2">Scope:</span> {program.scope}</p>}
-              {program.max_bounty && (
-                <p className="flex items-center"><span className="text-purple-400 font-semibold mr-2">Max Bounty:</span> <span className="text-green-400 font-bold">${program.max_bounty}</span></p>
-              )}
-              <div className="pt-2">
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${program.status === 'active' ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
-                  {program.status.toUpperCase()}
-                </span>
+              <div className="space-y-3 text-gray-300">
+                <p className="flex items-center text-sm"><span className="text-purple-400 font-bold mr-2 min-w-[80px]">Platform:</span> <span className="text-gray-200">{program.platform}</span></p>
+                {program.scope && <p className="flex items-center text-sm"><span className="text-purple-400 font-bold mr-2 min-w-[80px]">Scope:</span> <span className="text-gray-200">{program.scope}</span></p>}
+                {program.max_bounty && (
+                  <p className="flex items-center text-sm"><span className="text-purple-400 font-bold mr-2 min-w-[80px]">Max Bounty:</span> <span className="text-green-400 font-black text-lg">${program.max_bounty}</span></p>
+                )}
+                <div className="pt-3 flex items-center justify-between">
+                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold border-2 ${program.status === 'active' ? 'bg-green-500/20 text-green-400 border-green-500/40' : 'bg-gray-500/20 text-gray-400 border-gray-500/40'}`}>
+                    {program.status.toUpperCase()}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -781,52 +819,75 @@ function Vulnerabilities({ vulnerabilities, targets, onDelete, onRefresh, showFo
         </form>
       )}
 
-      <div className="space-y-4">
-        {filteredVulnerabilities.map((vuln) => {
+      <div className="space-y-6">
+        {filteredVulnerabilities.map((vuln, index) => {
           const target = targets.find(t => t.id === vuln.target_id)
           const severityBg = {
-            critical: 'bg-red-500/10 border-red-500/30',
-            high: 'bg-orange-500/10 border-orange-500/30',
-            medium: 'bg-yellow-500/10 border-yellow-500/30',
-            low: 'bg-blue-500/10 border-blue-500/30',
-            info: 'bg-gray-500/10 border-gray-500/30'
+            critical: 'bg-red-500/10 border-red-500/50 shadow-red-500/30',
+            high: 'bg-orange-500/10 border-orange-500/50 shadow-orange-500/30',
+            medium: 'bg-yellow-500/10 border-yellow-500/50 shadow-yellow-500/30',
+            low: 'bg-blue-500/10 border-blue-500/50 shadow-blue-500/30',
+            info: 'bg-gray-500/10 border-gray-500/50 shadow-gray-500/30'
           }
           return (
-            <div key={vuln.id} className={`group bg-gradient-to-br from-black/40 to-purple-900/10 backdrop-blur-md border ${severityBg[vuln.severity]} rounded-xl p-6 hover:shadow-xl transition-all duration-300`}>
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center flex-wrap gap-3 mb-4">
-                    <AlertCircle className={`w-6 h-6 ${getSeverityColor(vuln.severity)}`} />
-                    <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition">{vuln.title}</h3>
-                    <span className={`px-4 py-1 rounded-full text-xs font-bold ${getSeverityColor(vuln.severity)} bg-black/30`}>
-                      {vuln.severity.toUpperCase()}
-                    </span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      vuln.status === 'resolved' ? 'bg-green-500/20 text-green-400' :
-                      vuln.status === 'reported' ? 'bg-blue-500/20 text-blue-400' :
-                      vuln.status === 'triaged' ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-gray-500/20 text-gray-400'
-                    }`}>
-                      {vuln.status.toUpperCase()}
-                    </span>
+            <div key={vuln.id} className={`group relative bg-gradient-to-br from-black/60 to-purple-900/20 backdrop-blur-xl border-2 ${severityBg[vuln.severity]} rounded-2xl p-6 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 overflow-hidden scale-in`} style={{animationDelay: `${index * 0.05}s`}}>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-center flex-wrap gap-3 mb-4">
+                      <div className={`p-2 rounded-xl ${getSeverityColor(vuln.severity)} bg-black/30 border-2 border-current/30`}>
+                        <AlertCircle className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-2xl font-black text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">{vuln.title}</h3>
+                      <span className={`px-4 py-1.5 rounded-full text-xs font-black ${getSeverityColor(vuln.severity)} bg-black/40 border-2 border-current/40 uppercase tracking-wider`}>
+                        {vuln.severity}
+                      </span>
+                      <span className={`px-4 py-1.5 rounded-full text-xs font-bold border-2 ${
+                        vuln.status === 'resolved' ? 'bg-green-500/20 text-green-400 border-green-500/40' :
+                        vuln.status === 'reported' ? 'bg-blue-500/20 text-blue-400 border-blue-500/40' :
+                        vuln.status === 'triaged' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40' :
+                        'bg-gray-500/20 text-gray-400 border-gray-500/40'
+                      } uppercase tracking-wider`}>
+                        {vuln.status}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-200">
+                      {target && (
+                        <div className="flex items-center bg-black/20 p-3 rounded-lg border border-purple-500/20">
+                          <Target className="w-5 h-5 mr-2 text-purple-400" />
+                          <span className="text-purple-400 font-bold mr-2">Target:</span>
+                          <span className="font-semibold">{target.domain}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center bg-black/20 p-3 rounded-lg border border-purple-500/20">
+                        <Bug className="w-5 h-5 mr-2 text-purple-400" />
+                        <span className="text-purple-400 font-bold mr-2">Type:</span>
+                        <span className="font-semibold">{vuln.vulnerability_type}</span>
+                      </div>
+                      {vuln.bounty_amount && (
+                        <div className="flex items-center bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-3 rounded-lg border-2 border-green-500/30">
+                          <DollarSign className="w-5 h-5 mr-2 text-green-400" />
+                          <span className="text-green-400 font-bold mr-2">Bounty:</span>
+                          <span className="text-green-400 font-black text-xl">${vuln.bounty_amount}</span>
+                        </div>
+                      )}
+                      {vuln.description && (
+                        <div className="md:col-span-2 mt-2 p-4 bg-black/30 rounded-xl border-2 border-purple-500/20">
+                          <span className="text-purple-400 font-bold text-sm uppercase tracking-wider">Description:</span>
+                          <p className="text-gray-200 mt-2 leading-relaxed">{vuln.description}</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
-                    {target && <p className="flex items-center"><Target className="w-4 h-4 mr-2 text-purple-400" /><span className="text-purple-400 font-semibold mr-2">Target:</span> {target.domain}</p>}
-                    <p className="flex items-center"><Bug className="w-4 h-4 mr-2 text-purple-400" /><span className="text-purple-400 font-semibold mr-2">Type:</span> {vuln.vulnerability_type}</p>
-                    {vuln.bounty_amount && (
-                      <p className="flex items-center"><DollarSign className="w-4 h-4 mr-2 text-green-400" /><span className="text-purple-400 font-semibold mr-2">Bounty:</span> <span className="text-green-400 font-bold">${vuln.bounty_amount}</span></p>
-                    )}
-                    {vuln.description && (
-                      <p className="md:col-span-2 mt-2 p-3 bg-black/20 rounded-lg border border-purple-500/10"><span className="text-purple-400 font-semibold">Description:</span> <span className="text-gray-300">{vuln.description}</span></p>
-                    )}
-                  </div>
+                  <button
+                    onClick={() => onDelete(vuln.id)}
+                    className="p-3 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-xl hover:scale-110 transition-all duration-300 ml-4 border-2 border-transparent hover:border-red-500/40"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => onDelete(vuln.id)}
-                  className="text-red-400 hover:text-red-300 hover:scale-110 transition-all ml-4"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
               </div>
             </div>
           )
